@@ -1,0 +1,65 @@
+.header {
+    /* From https://css.glass */
+    z-index: 9999;
+    backdrop-filter: blur(10.8px);
+    -webkit-backdrop-filter: blur(10.8px);
+    padding: 1rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    transition: all 0.3s ease-in-out;
+
+    h1 {
+        color: rgb(0, 0, 0);
+        font-size: 18px;
+        line-height: 1.2;
+        font-weight: 500;
+        margin: 0;
+    }
+
+    p {
+        margin: 0;
+    }
+
+}
+
+.scrolledHeader {
+    z-index: 9999;
+
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.64);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10.8px);
+    -webkit-backdrop-filter: blur(10.8px);
+    border: 1px solid rgba(255, 255, 255, 0.67);
+    position: fixed;
+    margin-top: 1rem;
+    top: 0;
+    width: 100%;
+    transform: translate(-50%);
+    left: 50%;
+    transition: all 0.3s ease-in-out;
+
+    div {
+        color: white;
+    }
+}
+
+.button {
+    border: 1px solid white;
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: red;
+}
+
+
+.sessss {
+    max-width: 100%;
+
+}

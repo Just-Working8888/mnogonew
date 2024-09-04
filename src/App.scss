@@ -1,0 +1,282 @@
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.product-card {
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    align-items: center;
+    gap: 1rem;
+    padding: 15px;
+    display: flex;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+
+    &:hover {
+        transform: scale(1.05);
+    }
+
+    .product-image {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 10px;
+    }
+
+    .product-name {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .product-price {
+        font-size: 16px;
+        color: #333;
+
+        .old-price {
+            text-decoration: line-through;
+            color: #FF6347;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+    }
+}
+
+.product-list {
+    display: flex;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.pizza-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: calc(25% - 20px);
+    flex-direction: column;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+
+    .image-wrapper {
+        position: relative;
+
+        .pizza-image {
+            width: 100%;
+            height: 300px;
+            border-radius: 20px;
+        }
+
+        .new-label {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: #ee1d23;
+            color: #fff;
+            font-size: 12px;
+            padding: 5px 10px;
+            border-radius: 20px;
+        }
+    }
+
+    .pizza-info {
+        padding: 15px;
+
+        .pizza-name {
+            font-size: 18px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .pizza-description {
+            font-size: 14px;
+            color: #777;
+            margin-bottom: 15px;
+        }
+
+        .pizza-price {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .select-button {
+            background-color: #ee1d23;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            color: white;
+            transition: 0.2s;
+
+            &:hover {
+                background-color: #FE724C;
+                color: #fff;
+            }
+        }
+    }
+}
+
+.pizza-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.footer {
+    background-color: #1a1a1a;
+    color: #fff;
+    padding: 20px 0;
+
+    .footer-top {
+        background-color: #ee1d23;
+        padding: 15px 0;
+        text-align: center;
+
+        .promo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+
+            .promo-text {
+                font-size: 18px;
+            }
+
+            .promo-button {
+                background-color: #ffedd5;
+                color: #ee1d23;
+                padding: 10px 20px;
+                border-radius: 20px;
+                border: none;
+                cursor: pointer;
+                font-size: 14px;
+
+                &:hover {
+                    background-color: #ee1d23;
+                    color: #fff;
+                }
+            }
+        }
+    }
+
+    .footer-content {
+        display: flex;
+        justify-content: space-around;
+        padding: 20px;
+        text-align: left;
+
+        .footer-section {
+            h4 {
+                margin-bottom: 10px;
+                font-size: 16px;
+                color: #fff;
+            }
+
+            ul {
+                list-style: none;
+                padding: 0;
+
+                li {
+                    font-size: 14px;
+                    color: #b3b3b3;
+                    margin-bottom: 8px;
+
+                    &:hover {
+                        color: #fff;
+                    }
+                }
+            }
+        }
+
+        .footer-contacts {
+            text-align: right;
+
+            .phone-number {
+                font-size: 20px;
+                margin-bottom: 10px;
+            }
+
+            .contact-info {
+                font-size: 14px;
+                margin-bottom: 15px;
+            }
+
+            .payment-methods {
+                span {
+                    display: block;
+                    font-size: 14px;
+                    margin-bottom: 10px;
+                }
+
+                .payment-icons {
+                    display: flex;
+                    gap: 10px;
+
+                    img {
+                        width: 40px;
+                        height: 40px;
+                    }
+                }
+            }
+        }
+    }
+
+    .footer-bottom {
+        display: flex;
+        justify-content: space-between;
+        padding: 15px 20px;
+        background-color: #000;
+        font-size: 12px;
+        color: #b3b3b3;
+
+        span {
+            &:hover {
+                color: #fff;
+            }
+        }
+    }
+}
+
+.image-wrapper {
+    .ant-skeleton-element {
+        width: 100%;
+    }
+
+    .ant-skeleton-image {
+        width: 100% !important;
+        height: 270px !important;
+    }
+}
+
+.categoriesSex {
+    display: flex;
+    flex-shrink: 1;
+    padding: 1rem 0;
+    /* Позволяет категории уменьшаться */
+    max-width: 80vw;
+    width: 100%;
+    /* Ограничиваем ширину контейнера для категорий */
+    overflow: auto;
+    white-space: nowrap;
+}
+.categoriesSex::-webkit-scrollbar {
+    height: 8px; /* Высота горизонтального скролла */
+}
+
+.categoriesSex::-webkit-scrollbar-track {
+    background: transparent; /* Фон трека */
+}
+
+.categoriesSex::-webkit-scrollbar-thumb {
+    background-color: #888; /* Цвет бегунка */
+    border-radius: 10px; /* Скругленные углы */
+    border: 2px solid transparent; /* Дополнительное пространство вокруг бегунка */
+}
+
+.categoriesSex::-webkit-scrollbar-thumb:hover {
+    background-color: #555; /* Цвет при наведении */
+}
