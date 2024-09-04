@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import PizzaCard from '../PizzaCard/PizzaCard';
 import { useAppDispatch, useAppSelector } from '../../store/hook';
 import { setOffcet } from '../../store/slices/windowSlice';
@@ -11,36 +11,7 @@ import { formatParams } from '../../helpers/convertProps';
 import { setTargetId } from '../../store/slices/scroolSlice';
 
 const PizzaList: React.FC = () => {
-    const pizzas = [
-        {
-            image: '/images/pizza1.png',
-            name: 'Мясная с аджикой',
-            description: 'Охотничьи колбаски, острый соус аджика, колбаски чоризо из цыпленка, перец, моцарелла и томатный соус',
-            price: '495',
-            isNew: true,
-        },
-        {
-            image: '/images/pizza2.png',
-            name: 'Креветки со сладким чили',
-            description: 'Креветки, ананасы, сладкий перец, моцарелла и соус альфредо',
-            price: '545',
-            isNew: true,
-        },
-        {
-            image: '/images/pizza3.png',
-            name: 'Баварская',
-            description: 'Охотничьи колбаски, маринованные огурчики, красный лук, горчичный соус и томатный соус',
-            price: '495',
-            isNew: true,
-        },
-        {
-            image: '/images/pizza4.png',
-            name: 'Чикен Бомбони',
-            description: 'Куриные кусочки, сладкий перчик, сыры чеддер и пармезан, соус сладкий чили и альфредо',
-            price: '495',
-            isNew: false,
-        },
-    ];
+   
     const dispatch = useAppDispatch()
     const data = useAppSelector((state) => state.product.data.results)
     const hasNext = useAppSelector((state) => state.product.data.next)

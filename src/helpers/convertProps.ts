@@ -1,4 +1,4 @@
-import { windowState } from "store/slices/windowSlice";
+import { windowState } from "../store/slices/windowSlice";
 
 export function formatParams(params: windowState): string {
     const { menuprops } = params;

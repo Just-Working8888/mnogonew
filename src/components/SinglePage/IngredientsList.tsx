@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./PizzaCard.module.scss";
-import { useAppSelector } from "../../store/hook";
 
 const IngredientsList: React.FC = () => {
   const ingredients = [
@@ -10,7 +9,6 @@ const IngredientsList: React.FC = () => {
     { name: "Нежный цыплёнок", price: 79 },
   ];
 
-  const { product } = useAppSelector((state) => state.product)
   return (
     <div className={styles.ingredients}>
       <h3>Ингредиенты</h3>

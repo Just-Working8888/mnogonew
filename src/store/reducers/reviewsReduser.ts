@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { message } from "antd";
 import axios, { CancelToken } from "axios";
-import { IPeviewsGet, IReviews, IReviewsDto } from "../../store/models/IReviews";
+import { IPeviewsGet, IReviewsDto } from "../../store/models/IReviews";
 import { api } from "../../api";
 
 export const fetchReviews = createAsyncThunk<IPeviewsGet, { cancelToken?: CancelToken, }, { rejectValue?: string }>(

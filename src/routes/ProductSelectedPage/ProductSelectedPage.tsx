@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import PizzaCard from '../../components/SinglePage/PizzaCard'
-import { useAppDispatch, useAppSelector } from '../../store/hook'
+import { useAppDispatch } from '../../store/hook'
 import { useParams } from 'react-router-dom'
 import { fetchProduct, fetchProductByID } from '../../store/reducers/productReduser'
 

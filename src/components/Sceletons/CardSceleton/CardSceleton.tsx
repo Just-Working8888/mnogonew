@@ -1,6 +1,5 @@
 import React from 'react';
-import classes from './Card.module.scss'
-import { Image, Skeleton } from 'antd';
+import {  Skeleton } from 'antd';
 
 
 const CardSceleton: React.FC = () => {

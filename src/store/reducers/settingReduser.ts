@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { CancelToken } from "axios";
-import { IPromotionResponse, ISettingGet, ISettings } from "../../store/models/ISetting";
+import { IPromotionResponse, ISettingGet } from "../../store/models/ISetting";
 import { api } from "../../api";
 
 export const fetchSetting = createAsyncThunk<ISettingGet, { cancelToken?: CancelToken }, { rejectValue?: string }>(

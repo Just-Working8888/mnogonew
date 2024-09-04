@@ -1,5 +1,5 @@
 import { CancelToken } from "axios";
-import { IPromotionResponse, ISettingGet, ISettings } from "../store/models/ISetting";
+import { IPromotionResponse, ISettingGet } from "../store/models/ISetting";
 import { instance } from ".";
 
 const getSettings = (sourceToken?: CancelToken) =>

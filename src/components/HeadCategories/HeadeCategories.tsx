@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {  useState } from 'react';
 import { Button, Flex } from 'antd';
 import { useAppDispatch, useAppSelector } from '../../store/hook';
 import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';

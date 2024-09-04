@@ -20,7 +20,7 @@ export const fetchTable = createAsyncThunk<ITable[], { cancelToken?: CancelToken
 
 export const fetchTableById = createAsyncThunk<ITable, { cancelToken?: CancelToken, id: number }, { rejectValue?: string }>(
     'table/fetchTableById',
-    async ({ cancelToken, id }, { rejectWithValue }) => {
+    async ({ id }, { rejectWithValue }) => {
         try {
             const response = await api.getTableById(id);
             return response.data

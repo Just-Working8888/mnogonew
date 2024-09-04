@@ -1,4 +1,3 @@
-import { api } from "api"
 
 export async function ReplaceCreateOrder() {
     localStorage.removeItem('cart_id')

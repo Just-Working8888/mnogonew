@@ -11,6 +11,8 @@ const PizzaCard: React.FC = () => {
     const [size, setSize] = useState("Маленькая");
     const [crust, setCrust] = useState("Традиционное");
     const [price, setPrice] = useState(799);
+    console.log(setPrice);
+    
     const { product } = useAppSelector((state) => state.product)
     return (
         <div className={styles.pizzaCard}>

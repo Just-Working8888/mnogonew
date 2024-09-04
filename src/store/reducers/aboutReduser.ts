@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { CancelToken } from "axios";
-import { IAbout, IAboutFucts, IAboutFuctsGet, IAboutGet } from "../../store/models/IAbout";
+import { IAbout, IAboutFucts } from "../../store/models/IAbout";
 import { api } from "../../api";
 
 export const fetchAboutUs = createAsyncThunk<IAbout[], { cancelToken?: CancelToken }, { rejectValue?: string }>(
