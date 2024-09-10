@@ -160,7 +160,7 @@ const Header: React.FC = () => {
             )}
             <div className={classes.mobile_cart}>
                 <CartDrawer />
-                <button className='buttonn'>Оформить</button>
+                <button className='buttonn' style={{ color: 'white' }}>Оформить</button>
             </div>
         </>
     );

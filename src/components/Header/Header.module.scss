@@ -104,11 +104,12 @@
 
     .mobile_cart {
         display: flex;
+        gap: 1rem;
         align-items: center;
         background: rgba(255, 255, 255, 0.64);
         border-radius: 16px 16px 0px 0px;
         box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-        backdrop-filter: blur(10.8px);
+        // backdrop-filter: blur(10.8px);
         -webkit-backdrop-filter: blur(10.8px);
         border: 1px solid rgba(255, 255, 255, 0.67);
         position: fixed;
