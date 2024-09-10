@@ -6,22 +6,22 @@ import { IPeviewsGet, IReviews, IReviewsDto } from '../store/models/IReviews';
 
 
 const getReviews = (sourceToken?: CancelToken) =>
-    instance.get<IPeviewsGet>(`/reviews/`, { cancelToken: sourceToken });
+    instance.get<IPeviewsGet>(`/products/reviews/`, { cancelToken: sourceToken });
 
 const getReviewsById = (id: number, sourceToken?: CancelToken) =>
-    instance.get<IReviews>(`/reviews/${id}`, { cancelToken: sourceToken });
+    instance.get<IReviews>(`/products/reviews/${id}`, { cancelToken: sourceToken });
 
 const createReviews = (data: IReviewsDto, sourceToken?: CancelToken) =>
-    instance.post('/reviews/', { ...data }, { cancelToken: sourceToken });
+    instance.post('/products/reviews/', { ...data }, { cancelToken: sourceToken });
 
 const updateReviews = (id: number, data: IReviewsDto, sourceToken?: CancelToken) =>
-    instance.put(`/reviews/${id}`, { ...data }, { cancelToken: sourceToken });
+    instance.put(`/products/reviews/${id}`, { ...data }, { cancelToken: sourceToken });
 
 const patchReviews = (id: number, data: IReviewsDto, sourceToken?: CancelToken) =>
-    instance.patch(`/reviews/${id}`, { ...data }, { cancelToken: sourceToken });
+    instance.patch(`/products/reviews/${id}`, { ...data }, { cancelToken: sourceToken });
 
 const deleteReviewsById = (id: number, sourceToken?: CancelToken) =>
-    instance.delete(`/reviews/${id}`, { cancelToken: sourceToken });
+    instance.delete(`/products/reviews/${id}`, { cancelToken: sourceToken });
 
 const endpoints = {
     getReviews,

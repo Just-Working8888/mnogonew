@@ -8,6 +8,7 @@ import { setCategory, setOffcet } from '../../store/slices/windowSlice';
 import { clearData } from '../../store/slices/productSlice';
 import CartDrawer from '../CartBar/CartBar';
 import { useNavigate } from 'react-router-dom';
+import AuthModal from '../Auth/Auth';
 
 const Header: React.FC = () => {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -48,6 +49,16 @@ const Header: React.FC = () => {
     const handleNavigate = (path: any) => {
         navigate(path, { replace: true });
         handleScroll(); // Вызываем handleScroll после навигации
+    };
+
+    const [isModalVisible, setIsModalVisible] = useState(false);
+
+    const showModal = () => {
+        setIsModalVisible(true);
+    };
+
+    const handleCloseModal = () => {
+        setIsModalVisible(false);
     };
 
 
@@ -100,6 +111,7 @@ const Header: React.FC = () => {
                                     alt=""
                                 />
                             </div>
+
                             <Flex className='categoriesSex'>
                                 <Button
                                     onClick={() => {
@@ -150,6 +162,12 @@ const Header: React.FC = () => {
                         {/* <div className={classes.button}>
                             <ShoppingCartOutlined />
                         </div> */}
+                        <Button type="primary" onClick={showModal}>
+                            Войти / Зарегистрироваться
+                        </Button>
+
+                        {/* Использование компонента модального окна */}
+                        <AuthModal visible={isModalVisible} onClose={handleCloseModal} />
                         <div className={classes.mobnone}>
                             <CartDrawer />
                         </div>

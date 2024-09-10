@@ -8,6 +8,7 @@ import Reviews from '../../components/SinglePage/Rewue/Rewue'
 const ProductSelectedPage = () => {
     const dispatch = useAppDispatch()
     const { id } = useParams()
+    
 
 
     useEffect(() => {

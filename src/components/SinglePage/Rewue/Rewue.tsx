@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { List, Avatar, Button, Modal, Form, Input, Rate } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import './Rewue.scss';
+import { useAppSelector } from '../../../store/hook';
+import AddRewue from '../AddRewue/AddRewue';
 
 interface Review {
     id: number;
@@ -88,6 +90,8 @@ const Reviews: React.FC = () => {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [reviews, setReviews] = useState<Review[]>(mockReviews);
     const [isAll, setIsAll] = useState(false)
+    const { product } = useAppSelector((state) => state.product)
+
 
     const showModal = () => {
         setIsModalVisible(true);
@@ -117,21 +121,21 @@ const Reviews: React.FC = () => {
         <div className="reviews-section">
             <List
                 itemLayout="horizontal"
-                dataSource={reviews.slice(0, isAll ? reviews.length : 3)}
+                dataSource={product?.product_reviews?.slice(0, isAll ? reviews.length : 3)}
                 footer={<Button onClick={() => setIsAll((prev) => !prev)}>
                     {isAll ? 'скрыть' : 'показать все'}
                 </Button>}
                 renderItem={(item) => (
                     <List.Item>
                         <List.Item.Meta
-                            avatar={
-                                item.user.user_img ? (
-                                    <Avatar src={item.user.user_img} />
-                                ) : (
-                                    <Avatar icon={<UserOutlined />} />
-                                )
-                            }
-                            title={item.user.user_username}
+                            // avatar={
+                            //     item.user.user_img ? (
+                            //         <Avatar src={item.user.user_img} />
+                            //     ) : (
+                            //         <Avatar icon={<UserOutlined />} />
+                            //     )
+                            // }
+                            // title={item.user.user_username}
                             description={
                                 <div>
                                     <p>{item.text}</p>
@@ -146,6 +150,7 @@ const Reviews: React.FC = () => {
             <Button type="primary" onClick={showModal}>
                 Оставить отзыв
             </Button>
+            <AddRewue />
             <Modal
                 title="Добавить отзыв"
                 visible={isModalVisible}
