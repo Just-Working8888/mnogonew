@@ -8,7 +8,7 @@ interface AddToCartButtonProps {
 const AddToCartButton: React.FC<AddToCartButtonProps> = ({ price }) => {
     return (
         <button className={styles.addToCart}>
-            Добавить в корзину за {price} ₽
+            Добавить в корзину за {price} с
         </button>
     );
 };

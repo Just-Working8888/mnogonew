@@ -11,7 +11,7 @@ import { formatParams } from '../../helpers/convertProps';
 import { setTargetId } from '../../store/slices/scroolSlice';
 
 const PizzaList: React.FC = () => {
-   
+
     const dispatch = useAppDispatch()
     const data = useAppSelector((state) => state.product.data.results)
     const hasNext = useAppSelector((state) => state.product.data.next)
@@ -34,9 +34,10 @@ const PizzaList: React.FC = () => {
     }, [menuprops])
     return (
         <div>
-            <h2>Популярные продукты</h2>
-            <br />
-            <div id={targetId} className="pizza-list">
+            <h1>Популярные продукты</h1>
+         
+            <div id={targetId} className="pizza-list" style={{ paddingTop: '8rem' }}>
+
                 {laoding ?
                     <>
                         <CardSceleton />

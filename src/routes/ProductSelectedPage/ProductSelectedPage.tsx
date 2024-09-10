@@ -3,6 +3,7 @@ import PizzaCard from '../../components/SinglePage/PizzaCard'
 import { useAppDispatch } from '../../store/hook'
 import { useParams } from 'react-router-dom'
 import { fetchProduct, fetchProductByID } from '../../store/reducers/productReduser'
+import Reviews from '../../components/SinglePage/Rewue/Rewue'
 
 const ProductSelectedPage = () => {
     const dispatch = useAppDispatch()
@@ -16,6 +17,7 @@ const ProductSelectedPage = () => {
     return (
         <div className='container'>
             <PizzaCard />
+            <Reviews/>
         </div>
     )
 }

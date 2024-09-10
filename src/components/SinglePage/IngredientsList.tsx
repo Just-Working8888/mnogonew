@@ -16,7 +16,7 @@ const IngredientsList: React.FC = () => {
         {ingredients.map((ingredient) => (
           <div key={ingredient.name} className={styles.ingredient}>
             <span>{ingredient.name}</span>
-            <span>{ingredient.price} ₽</span>
+            <span>{ingredient.price} cом</span>
           </div>
         ))}
       </div>

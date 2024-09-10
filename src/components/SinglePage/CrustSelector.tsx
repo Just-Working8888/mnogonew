@@ -1,26 +1,20 @@
 import React from "react";
 import styles from "./PizzaCard.module.scss";
+import { Flex, Rate } from "antd";
+import { useAppSelector } from "../../store/hook";
 
-interface CrustSelectorProps {
-    crust: string;
-    setCrust: (crust: string) => void;
-}
 
-const CrustSelector: React.FC<CrustSelectorProps> = ({ crust, setCrust }) => {
+
+const CrustSelector: React.FC = () => {
+    const { product } = useAppSelector((state) => state.product)
+
     return (
         <div className={styles.crustSelector}>
-            <button
-                className={crust === "Традиционное" ? styles.active : ""}
-                onClick={() => setCrust("Традиционное")}
-            >
-                Традиционное
-            </button>
-            <button
-                className={crust === "Тонкое" ? styles.active : ""}
-                onClick={() => setCrust("Тонкое")}
-            >
-                Тонкое
-            </button>
+            <Flex gap={16}>
+                <Rate value={product.average_rating} />
+            
+                <p>Количество отзывов {product?.product_reviews?.length}</p>
+            </Flex>
         </div>
     );
 };

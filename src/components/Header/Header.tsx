@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Flex } from 'antd';
-import { CaretDownOutlined, CaretUpOutlined, PhoneOutlined, ShoppingCartOutlined } from '@ant-design/icons';
+import { CaretDownOutlined, CaretUpOutlined, PhoneOutlined } from '@ant-design/icons';
 import classes from './Header.module.scss';
 import { useAppDispatch, useAppSelector } from '../../store/hook';
 import { fetchCategories } from '../../store/reducers/Categories';
 import { setCategory, setOffcet } from '../../store/slices/windowSlice';
 import { clearData } from '../../store/slices/productSlice';
+import CartDrawer from '../CartBar/CartBar';
+import { useNavigate } from 'react-router-dom';
 
 const Header: React.FC = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const targetId = useAppSelector((state) => state.scroll.targetId);
-
+    const navigate = useNavigate()
     const handleScroll = () => {
         if (targetId) {
             const targetElement = document.getElementById(targetId);
@@ -43,13 +45,19 @@ const Header: React.FC = () => {
         dispatch(fetchCategories({}))
     }, [menuprops])
 
+    const handleNavigate = (path: any) => {
+        navigate(path, { replace: true });
+        handleScroll(); // Вызываем handleScroll после навигации
+    };
+
+
     return (
         <>
             {!isScrolled ? (
                 <header className={classes.header}>
                     <Flex justify="space-between" align="center">
                         <Flex gap={26} align="center">
-                            <div>
+                            <div onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
                                 <img
                                     src="https://mnogosuhi.vercel.app/static/media/blackLogo%20(1).38e8ec556aedb0f78b19.png"
                                     width={50}
@@ -85,7 +93,7 @@ const Header: React.FC = () => {
                 <header className={classes.scrolledHeader}>
                     <Flex justify="space-between" align="center">
                         <Flex gap={26} align="center">
-                            <div>
+                            <div onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
                                 <img
                                     src="https://mnogosuhi.vercel.app/static/media/blackLogo%20(1).38e8ec556aedb0f78b19.png"
                                     width={50}
@@ -98,6 +106,7 @@ const Header: React.FC = () => {
                                         dispatch(setOffcet(1))
                                         dispatch(clearData())
                                         dispatch(setCategory(0))
+                                        handleNavigate('/')
                                         handleScroll()
                                     }}
 
@@ -115,6 +124,7 @@ const Header: React.FC = () => {
                                                 dispatch(setOffcet(1))
                                                 dispatch(clearData())
                                                 dispatch(setCategory(category.id))
+                                                handleNavigate('/')
                                                 handleScroll()
                                             }}
                                             type={
@@ -137,13 +147,21 @@ const Header: React.FC = () => {
                             </Flex>
 
                         </Flex>
-                        <div className={classes.button}>
+                        {/* <div className={classes.button}>
                             <ShoppingCartOutlined />
+                        </div> */}
+                        <div className={classes.mobnone}>
+                            <CartDrawer />
                         </div>
+
                     </Flex>
 
                 </header>
             )}
+            <div className={classes.mobile_cart}>
+                <CartDrawer />
+                <button className='buttonn'>Оформить</button>
+            </div>
         </>
     );
 };

@@ -1,5 +1,5 @@
 // StoriesSlider.tsx
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import Stories from 'react-insta-stories';
 
@@ -85,7 +85,31 @@ const storiesData = [
 const StoriesSlider: React.FC = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [currentStoryIndex, setCurrentStoryIndex] = useState<number | null>(null);
+  const [slidesPerView, setSlidesPerView] = useState(6);
 
+  useEffect(() => {
+    // Функция для обновления количества видимых слайдов на основе ширины экрана
+    const updateSlidesPerView = () => {
+      const screenWidth = window.innerWidth;
+      if (screenWidth > 1200) {
+        setSlidesPerView(6);
+      } else if (screenWidth > 992) {
+        setSlidesPerView(4);
+      } else if (screenWidth > 768) {
+        setSlidesPerView(3);
+      } else {
+        setSlidesPerView(2);
+      }
+    };
+
+    updateSlidesPerView();
+
+    // Обработчик события для изменения количества слайдов при изменении размера окна
+    window.addEventListener('resize', updateSlidesPerView);
+    return () => {
+      window.removeEventListener('resize', updateSlidesPerView);
+    };
+  }, []);
   const openModal = (index: number) => {
     setCurrentStoryIndex(index);
     setModalIsOpen(true);
@@ -99,7 +123,7 @@ const StoriesSlider: React.FC = () => {
   return (
     <div className="">
       <Swiper
-        slidesPerView={6}
+        slidesPerView={slidesPerView}
 
         className='stories-slider'
 
@@ -116,7 +140,7 @@ const StoriesSlider: React.FC = () => {
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
-    
+
         style={{
           content: {
             top: '50%',

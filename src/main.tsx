@@ -10,25 +10,25 @@ import store from './store/index.ts'
 import { BrowserRouter } from 'react-router-dom'
 
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <Provider store={store}>
-      <BrowserRouter>
-        <ConfigProvider locale={ru_RU} theme={{
-          token: {
-            colorPrimary: colors.primary50,
-            colorPrimaryHover: colors.primary100,
-            colorBgLayout: colors.white,
-            // colorBorder: colors.primaryborder,
-            // colorText: colors.primarytext,
-            // colorBgTextActive: colors.lightgrayfill,
-            // colorBgTextHover: colors.lightgrayfill,
-            // colorFillAlter: colors.lightgrayfill,
-            // colorBgElevated: colors.lightgrayfill,
-          },
-        }}>
-          <App />
-        </ConfigProvider>
-      </BrowserRouter>
-    </Provider>
-  </StrictMode>,
+
+  <Provider store={store}>
+    <BrowserRouter>
+      <ConfigProvider locale={ru_RU} theme={{
+        token: {
+          colorPrimary: colors.primary50,
+          colorPrimaryHover: colors.primary100,
+          colorBgLayout: colors.white,
+          // colorBorder: colors.primaryborder,
+          // colorText: colors.primarytext,
+          // colorBgTextActive: colors.lightgrayfill,
+          // colorBgTextHover: colors.lightgrayfill,
+          // colorFillAlter: colors.lightgrayfill,
+          // colorBgElevated: colors.lightgrayfill,
+        },
+      }}>
+        <App />
+      </ConfigProvider>
+    </BrowserRouter>
+  </Provider>
+
 )
