@@ -43,6 +43,7 @@ const Header: React.FC = () => {
     const { data } = useAppSelector((state) => state.categories)
     const { menuprops } = useAppSelector((state) => state.window)
     const [all, setALl] = useState(false)
+console.log(setALl);
 
     useEffect(() => {
         dispatch(fetchCategories({}))
