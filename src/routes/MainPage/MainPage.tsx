@@ -1,4 +1,5 @@
 
+import { Helmet } from 'react-helmet-async'
 import '../../App.scss'
 import CategoryList from '../../components/HeadCategories/HeadeCategories'
 import PizzaList from '../../components/PizzaList/PizzaList'
@@ -9,6 +10,9 @@ function MainPage() {
 
     return (
         <>
+            <Helmet>
+                <title>Mnogosushi | Главная</title>
+            </Helmet>
 
             <div className="container">
                 <CategoryList />
