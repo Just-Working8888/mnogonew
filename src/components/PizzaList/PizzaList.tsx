@@ -33,9 +33,9 @@ const PizzaList: React.FC = () => {
         dispatch(fetchProduct({ filters: formatParams({ menuprops }) }))
     }, [menuprops])
     return (
-        <div>
+        <div className='sushilistsex'>
             <h1>Популярные продукты</h1>
-         
+
             <div id={targetId} className="pizza-list" style={{ paddingTop: '8rem' }}>
 
                 {laoding ?
@@ -54,6 +54,7 @@ const PizzaList: React.FC = () => {
                     </>
                     :
                     <InfiniteScroll
+                        style={{ width: '100%' }}
                         dataLength={data.length}
                         next={next}
                         className="pizza-list"
