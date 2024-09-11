@@ -37,11 +37,18 @@ const Header: React.FC = () => {
             clearTimeout(handler); // Очищаем таймер
         };
     }, [search]);
+    const handleNavigate = (path: string) => {
+        navigate(path, { replace: true });
+        handleScroll();
+    };
+
 
     useEffect(() => {
         dispatch(setOffcet(1));
         dispatch(clearData());
         handleScroll();
+        handleNavigate('/')
+        dispatch(setCategory(0))
         dispatch(fetchProduct({ filters: `search=${debouncedSearch}` }));
     }, [debouncedSearch]);
     useEffect(() => {
@@ -122,6 +129,7 @@ const Header: React.FC = () => {
                                         dispatch(setOffcet(1))
                                         dispatch(clearData())
                                         dispatch(setCategory(0))
+                                        handleNavigate('/')
                                         handleScroll()
                                     }}
                                     type={
@@ -137,6 +145,7 @@ const Header: React.FC = () => {
                                             dispatch(setOffcet(1))
                                             dispatch(clearData())
                                             dispatch(setCategory(category.id))
+                                            handleNavigate('/')
                                             handleScroll()
                                         }}
                                         type={
