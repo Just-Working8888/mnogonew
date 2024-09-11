@@ -77,14 +77,15 @@ const Header: React.FC = () => {
                                     alt=""
                                 />
                             </div>
-                    
+                            <AuthModal visible={isModalVisible} onClose={handleCloseModal} />
+
                             <div>
                                 <a href="tel:0 (551) 550-550">0 (551) 550-550</a>
                                 <p>Звонок по телефону</p>
                             </div>
                         </Flex>
                         <div>
-                        <Protected fallback={<Button style={{ height: '40px', borderRadius: '10px' }} type="primary" onClick={showModal}>
+                            <Protected fallback={<Button style={{ height: '40px', borderRadius: '10px' }} type="primary" onClick={showModal}>
                                 Войти / Зарегистрироваться
                             </Button>}>
                                 <Button style={{ height: '40px', borderRadius: '10px' }} onClick={() => deleteCookie('access_token')}>Выйти</Button>
@@ -94,17 +95,16 @@ const Header: React.FC = () => {
                 </header>
             ) : (
                 <header className={classes.scrolledHeader}>
-                    <Flex justify="space-between" align="center">
-                        <Flex gap={26} align="center">
-                            <div onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
-                                <img
-                                    src="https://mnogosuhi.vercel.app/static/media/blackLogo%20(1).38e8ec556aedb0f78b19.png"
-                                    width={50}
-                                    alt=""
-                                />
-                            </div>
-
-                            <Flex className='categoriesSex'>
+                    <nav className="navbar">
+                        <div onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
+                            <img
+                                src="https://mnogosuhi.vercel.app/static/media/blackLogo%20(1).38e8ec556aedb0f78b19.png"
+                                width={50}
+                                alt=""
+                            />
+                        </div>
+                        <div className="navbar__pages">
+                            <div className="navbar__pages-wrapper">
                                 <Button
                                     onClick={() => {
                                         dispatch(setOffcet(1))
@@ -120,24 +120,22 @@ const Header: React.FC = () => {
                                             : 'text'}>
                                     Все
                                 </Button>
-                                {data.results
-                                    .slice(0, all === false ? 6 : data.results.length)
-                                    .map((category) =>
-                                        <Button
-                                            onClick={() => {
-                                                dispatch(setOffcet(1))
-                                                dispatch(clearData())
-                                                dispatch(setCategory(category.id))
-                                                handleNavigate('/')
-                                                handleScroll()
-                                            }}
-                                            type={
-                                                menuprops.category === category.id
-                                                    ? 'primary'
-                                                    : 'text'}>
-                                            {category.title}
-                                        </Button>
-                                    )}
+                                {data.results.map((category) =>
+                                    <Button
+                                        onClick={() => {
+                                            dispatch(setOffcet(1))
+                                            dispatch(clearData())
+                                            dispatch(setCategory(category.id))
+                                            handleNavigate('/')
+                                            handleScroll()
+                                        }}
+                                        type={
+                                            menuprops.category === category.id
+                                                ? 'primary'
+                                                : 'text'}>
+                                        {category.title}
+                                    </Button>
+                                )}
 
                                 <Button
                                     type="dashed"
@@ -148,27 +146,16 @@ const Header: React.FC = () => {
                                         ? 'Скрыть'
                                         : "Показать все"}
                                 </Button>
-                            </Flex>
-
-                        </Flex>
-                        {/* <div className={classes.button}>
-                            <ShoppingCartOutlined />
-                        </div> */}
-                        <Flex gap={10}>
-                       
-
-
-                            {/* Использование компонента модального окна */}
-                            <AuthModal visible={isModalVisible} onClose={handleCloseModal} />
-                            <div className={classes.mobnone}>
-                                <CartDrawer />
                             </div>
-                        </Flex>
-
-                    </Flex>
+                        </div>
+                        <div className={classes.mobnone}>
+                            <CartDrawer />
+                        </div>
+                    </nav>
 
                 </header>
             )}
+
             <div className={classes.mobile_cart}>
                 <CartDrawer />
                 <button className='buttonn' style={{ color: 'white' }}>Оформить</button>

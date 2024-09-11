@@ -271,27 +271,147 @@
 }
 
 .categoriesSex {
+    flex: 1;
     display: flex;
-    flex-shrink: 1;
-    padding: 1rem 0;
-    /* Позволяет категории уменьшаться */
-    max-width: 800px;
-    width: 100%;
-    /* Ограничиваем ширину контейнера для категорий */
-    overflow: auto;
+    justify-content: center;
+    overflow: hidden;
     white-space: nowrap;
 
-    @media (max-width:1200px) {
+    @media (max-width: 1200px) {
         max-width: 700px;
     }
-    @media (max-width:1100px) {
+
+    @media (max-width: 1100px) {
         max-width: 600px;
     }
-    @media (max-width:980px) {
+
+    @media (max-width: 980px) {
         max-width: 500px;
     }
-    @media (max-width:870px) {
+
+    @media (max-width: 870px) {
         max-width: 70vw;
+    }
+}
+
+.navbar {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+    align-items: center;
+
+    &__logo {
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    &__pages {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        overflow: hidden;
+        white-space: nowrap;
+
+        &-wrapper {
+            display: flex;
+            overflow-x: auto;
+            padding: 10px 0;
+            scroll-behavior: smooth;
+            max-width: 100%;
+
+            &::-webkit-scrollbar {
+                height: 8px;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                background-color: #ccc;
+                border-radius: 4px;
+            }
+        }
+    }
+
+    &__page {
+        margin: 0 10px;
+        text-decoration: none;
+        color: #333;
+        font-size: 16px;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    &__cart-button {
+        background-color: #ff5722;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 4px;
+
+        &:hover {
+            background-color: #e64a19;
+        }
+    }
+
+    // Адаптация для мобильных устройств
+    @media (max-width: 768px) {
+        flex-direction: column;
+        padding: 10px;
+
+        &__logo {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        &__pages {
+            flex-direction: column;
+            width: 100%;
+
+            &-wrapper {
+                flex-direction: row;
+                justify-content: space-around;
+                width: 100%;
+            }
+
+            .navbar__page {
+                font-size: 14px;
+            }
+        }
+
+        &__cart-button {
+            padding: 8px 15px;
+            font-size: 14px;
+        }
+    }
+
+    // Адаптация для совсем маленьких экранов
+    @media (max-width: 480px) {
+        flex-direction: row;
+        justify-content: space-between;
+
+        &__logo {
+            font-size: 18px;
+        }
+
+        &__cart-button {
+            padding: 5px 10px;
+            font-size: 12px;
+        }
+
+        &__pages {
+            &-wrapper {
+                max-width: 90%; // Чтобы страницы не занимали много места на маленьком экране
+            }
+
+            .navbar__page {
+                margin: 0 5px;
+                font-size: 12px;
+            }
+        }
     }
 }
 
@@ -318,6 +438,7 @@
     background-color: #555;
     /* Цвет при наведении */
 }
+
 
 
 .ant-input {

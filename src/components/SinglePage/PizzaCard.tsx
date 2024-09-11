@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./PizzaCard.module.scss";
 import PizzaImage from "./PizzaImage";
 import CrustSelector from "./CrustSelector";
@@ -7,10 +7,10 @@ import AddToCartButton from "./AddToCartButton";
 import { useAppSelector } from "../../store/hook";
 
 const PizzaCard: React.FC = () => {
-    const [price, setPrice] = useState(799);
-    console.log(setPrice);
 
     const { product } = useAppSelector((state) => state.product)
+
+
     return (
         <div className={styles.pizzaCard}>
             <div className={styles.pizzaCard__image}>
@@ -22,8 +22,8 @@ const PizzaCard: React.FC = () => {
 
                 <CrustSelector />
                 <IngredientsList />
-                
-                <AddToCartButton price={price} />
+
+                <AddToCartButton price={product.price} />
             </div>
         </div>
     );
