@@ -4,6 +4,9 @@ import { UserOutlined } from '@ant-design/icons';
 import './Rewue.scss';
 import { useAppSelector } from '../../../store/hook';
 import AddRewue from '../AddRewue/AddRewue';
+import Protected from '../../Protected/Protected';
+import { deleteCookie } from '../../../helpers/cookies';
+import AuthModal from '../../Auth/Auth';
 
 interface Review {
     id: number;
@@ -16,6 +19,21 @@ interface Review {
     stars: number;
     created: string;
 }
+export const formatDate = (dateString: string): string => {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const seconds = String(date.getSeconds()).padStart(2, '0');
+
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+};
+
+// Использование
+const date = '2024-09-11T11:20:46.804805+06:00';
+console.log(formatDate(date));  // Output: 2024-09-11 11:20:46
 
 const mockReviews: Review[] = [
     {
@@ -128,64 +146,37 @@ const Reviews: React.FC = () => {
                 renderItem={(item) => (
                     <List.Item>
                         <List.Item.Meta
-                            // avatar={
-                            //     item.user.user_img ? (
-                            //         <Avatar src={item.user.user_img} />
-                            //     ) : (
-                            //         <Avatar icon={<UserOutlined />} />
-                            //     )
-                            // }
-                            // title={item.user.user_username}
+                            avatar={
+                                item.user_img ? (
+                                    <Avatar src={item.user_img} />
+                                ) : (
+                                    <Avatar icon={<UserOutlined />} />
+                                )
+                            }
+                            title={item.user_username}
                             description={
                                 <div>
-                                    <p>{item.text}</p>
+
                                     <Rate disabled defaultValue={item.stars} />
-                                    <p className="review-date">{item.created}</p>
+                                    <p>{item.text}</p>
+                                    <p className="review-date">{item.created ? formatDate(item.created) : ''}</p>
                                 </div>
                             }
                         />
                     </List.Item>
                 )}
             />
-            <Button type="primary" onClick={showModal}>
-                Оставить отзыв
-            </Button>
-            <AddRewue />
-            <Modal
-                title="Добавить отзыв"
-                visible={isModalVisible}
-                onCancel={handleCancel}
-                footer={null}
-            >
-                <Form layout="vertical" onFinish={onFinish}>
-                    <Form.Item
-                        label="Товар"
-                        name="product"
-                        rules={[{ required: true, message: 'Пожалуйста, укажите товар!' }]}
-                    >
-                        <Input placeholder="Введите название товара" />
-                    </Form.Item>
-                    <Form.Item
-                        label="Отзыв"
-                        name="text"
-                        rules={[{ required: true, message: 'Пожалуйста, введите текст отзыва!' }]}
-                    >
-                        <Input.TextArea rows={4} placeholder="Введите ваш отзыв" />
-                    </Form.Item>
-                    <Form.Item
-                        label="Оценка"
-                        name="stars"
-                        rules={[{ required: true, message: 'Пожалуйста, оцените товар!' }]}
-                    >
-                        <Rate />
-                    </Form.Item>
-                    <Form.Item>
-                        <Button type="primary" htmlType="submit">
-                            Отправить
-                        </Button>
-                    </Form.Item>
-                </Form>
-            </Modal>
+            <Protected fallback={<Button style={{ height: '40px', borderRadius: '10px' }} type="primary" onClick={showModal}>
+                Войдите чтобы оставить отзыв
+            </Button>}>
+                <AddRewue />
+            </Protected>
+            <AuthModal visible={isModalVisible} onClose={() => setIsModalVisible(false)} />
+
+            <br />
+            <br />
+
+
         </div>
     );
 };

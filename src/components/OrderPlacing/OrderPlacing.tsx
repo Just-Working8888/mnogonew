@@ -109,7 +109,7 @@ const OrderForm: React.FC = () => {
 
 
 
-                        <Form.Item label="Метод оплаты" name="payment_method">
+                        <Form.Item initialValue="bankCard"  label="Метод оплаты" name="payment_method">
                             <Select defaultValue="bankCard" onChange={handlePaymentMethodChange}>
                                 <Option value="bankCard">Банковская карта</Option>
                                 <Option value="cash">Наличные</Option>

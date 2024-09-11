@@ -9,6 +9,8 @@ import { clearData } from '../../store/slices/productSlice';
 import CartDrawer from '../CartBar/CartBar';
 import { useNavigate } from 'react-router-dom';
 import AuthModal from '../Auth/Auth';
+import Protected from '../Protected/Protected';
+import { deleteCookie } from '../../helpers/cookies';
 
 const Header: React.FC = () => {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -66,7 +68,7 @@ const Header: React.FC = () => {
         <>
             {!isScrolled ? (
                 <header className={classes.header}>
-                    <Flex justify="space-between" align="center">
+                    <Flex wrap='wrap' gap={10} justify="space-between" align="center">
                         <Flex gap={26} align="center">
                             <div onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
                                 <img
@@ -96,7 +98,11 @@ const Header: React.FC = () => {
                             </div>
                         </Flex>
                         <div>
-                            <PhoneOutlined style={{ fontSize: '20px' }} />
+                        <Protected fallback={<Button style={{ height: '40px', borderRadius: '10px' }} type="primary" onClick={showModal}>
+                                Войти / Зарегистрироваться
+                            </Button>}>
+                                <Button style={{ height: '40px', borderRadius: '10px' }} onClick={() => deleteCookie('access_token')}>Выйти</Button>
+                            </Protected>
                         </div>
                     </Flex>
                 </header>
@@ -162,15 +168,16 @@ const Header: React.FC = () => {
                         {/* <div className={classes.button}>
                             <ShoppingCartOutlined />
                         </div> */}
-                        <Button type="primary" onClick={showModal}>
-                            Войти / Зарегистрироваться
-                        </Button>
+                        <Flex gap={10}>
+                       
 
-                        {/* Использование компонента модального окна */}
-                        <AuthModal visible={isModalVisible} onClose={handleCloseModal} />
-                        <div className={classes.mobnone}>
-                            <CartDrawer />
-                        </div>
+
+                            {/* Использование компонента модального окна */}
+                            <AuthModal visible={isModalVisible} onClose={handleCloseModal} />
+                            <div className={classes.mobnone}>
+                                <CartDrawer />
+                            </div>
+                        </Flex>
 
                     </Flex>
 
