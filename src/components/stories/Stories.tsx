@@ -38,10 +38,13 @@ const StoriesSlider: React.FC = () => {
   const openModal = (index: number) => {
     setCurrentStoryIndex(index);
     setModalIsOpen(true);
+    window.scrollTo(0, 0); // Скроллим наверх
+    document.body.style.overflow = 'hidden'; // Блокируем скролл
   };
 
   const closeModal = () => {
     setModalIsOpen(false);
+    document.body.style.overflow = 'auto'; 
     setCurrentStoryIndex(null);
   };
   const handleStoryEnd = () => {
