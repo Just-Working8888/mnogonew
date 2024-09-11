@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Flex } from 'antd';
-import { CaretDownOutlined, CaretUpOutlined, PhoneOutlined } from '@ant-design/icons';
+import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
 import classes from './Header.module.scss';
 import { useAppDispatch, useAppSelector } from '../../store/hook';
 import { fetchCategories } from '../../store/reducers/Categories';

@@ -52,6 +52,8 @@ const SearchComponent: React.FC = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [selected, setSelected] = useState<string | null>(null);
+    console.log(setSelected);
+    
 
     useEffect(() => {
         if (debouncedQuery.length > 2) {

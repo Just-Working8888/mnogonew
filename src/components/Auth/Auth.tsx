@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { LockOutlined, UserOutlined, MailOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input, message, Modal } from 'antd';
-import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import classes from './AuthModal.module.scss';
 import { useAppDispatch } from '../../store/hook';
@@ -10,7 +9,6 @@ import { setCookie } from '../../helpers/cookies';
 
 const AuthModal: React.FC<{ visible: boolean, onClose: () => void }> = ({ visible, onClose }) => {
     const dispatch = useAppDispatch();
-    const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [isLogin, setIsLogin] = useState(true); // состояние для переключения между формами
 
@@ -39,6 +37,8 @@ const AuthModal: React.FC<{ visible: boolean, onClose: () => void }> = ({ visibl
         try {
             setLoading(true);
             // Ваша логика для регистрации
+            console.log(values);
+            
             message.success('Регистрация прошла успешно');
             onClose();
         } catch (err: any) {

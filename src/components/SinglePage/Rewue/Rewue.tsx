@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import { List, Avatar, Button, Modal, Form, Input, Rate } from 'antd';
+import { List, Avatar, Button, Rate } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import './Rewue.scss';
 import { useAppSelector } from '../../../store/hook';
 import AddRewue from '../AddRewue/AddRewue';
 import Protected from '../../Protected/Protected';
-import { deleteCookie } from '../../../helpers/cookies';
 import AuthModal from '../../Auth/Auth';
 
 interface Review {
@@ -107,6 +106,8 @@ const mockReviews: Review[] = [
 const Reviews: React.FC = () => {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [reviews, setReviews] = useState<Review[]>(mockReviews);
+    console.log(setReviews);
+    
     const [isAll, setIsAll] = useState(false)
     const { product } = useAppSelector((state) => state.product)
 
@@ -115,25 +116,21 @@ const Reviews: React.FC = () => {
         setIsModalVisible(true);
     };
 
-    const handleCancel = () => {
-        setIsModalVisible(false);
-    };
-
-    const onFinish = (values: any) => {
-        const newReview: Review = {
-            id: reviews.length + 1,
-            user: {
-                user_img: '',
-                user_username: 'Новый пользователь', // Замените на авторизованного пользователя
-            },
-            product: values.product,
-            text: values.text,
-            stars: values.stars,
-            created: new Date().toLocaleDateString(),
-        };
-        setReviews([...reviews, newReview]);
-        setIsModalVisible(false);
-    };
+    // const onFinish = (values: any) => {
+    //     const newReview: Review = {
+    //         id: reviews.length + 1,
+    //         user: {
+    //             user_img: '',
+    //             user_username: 'Новый пользователь', // Замените на авторизованного пользователя
+    //         },
+    //         product: values.product,
+    //         text: values.text,
+    //         stars: values.stars,
+    //         created: new Date().toLocaleDateString(),
+    //     };
+    //     setReviews([...reviews, newReview]);
+    //     setIsModalVisible(false);
+    // };
 
     return (
         <div className="reviews-section">
