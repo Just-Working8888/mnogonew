@@ -1,9 +1,10 @@
-import React, {  useState } from 'react';
+import React, { useState } from 'react';
 import { Button, Flex } from 'antd';
 import { useAppDispatch, useAppSelector } from '../../store/hook';
 import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
 import { setCategory, setOffcet } from '../../store/slices/windowSlice';
 import { clearData } from '../../store/slices/productSlice';
+import { useNavigate } from 'react-router-dom';
 
 
 const CategoryList: React.FC = () => {
@@ -11,6 +12,8 @@ const CategoryList: React.FC = () => {
     const { data } = useAppSelector((state) => state.categories)
     const { menuprops } = useAppSelector((state) => state.window)
     const [all, setALl] = useState(false)
+    const navigate = useNavigate()
+    console.log(setALl);
 
     const targetId = useAppSelector((state) => state.scroll.targetId);
 
@@ -58,9 +61,10 @@ const CategoryList: React.FC = () => {
 
             <Button
                 type="dashed"
+
                 icon={all ? <CaretUpOutlined /> : <CaretDownOutlined />}
 
-                onClick={() => setALl(!all)}>
+                onClick={() => navigate('/categories')}>
                 {all
                     ? 'Скрыть'
                     : "Показать все"}

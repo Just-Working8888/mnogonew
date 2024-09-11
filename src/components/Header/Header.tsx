@@ -139,9 +139,10 @@ const Header: React.FC = () => {
 
                                 <Button
                                     type="dashed"
+                                    
                                     icon={all ? <CaretUpOutlined /> : <CaretDownOutlined />}
 
-                                    onClick={() => setALl(!all)}>
+                                    onClick={() => navigate('/categories')}>
                                     {all
                                         ? 'Скрыть'
                                         : "Показать все"}
