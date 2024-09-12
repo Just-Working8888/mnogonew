@@ -11,23 +11,23 @@ const IngredientsList: React.FC = () => {
       <div className={styles.ingredientsList}>
 
         <div className={styles.ingredient}>
-          <span>жиры</span>
+          <span>Жиры</span>
           <span>{product.fats}</span>
         </div>
         <div className={styles.ingredient}>
-          <span>белки</span>
+          <span>Белки</span>
           <span>{product.proteins}</span>
         </div>
         <div className={styles.ingredient}>
-          <span>углеводы</span>
+          <span>Углеводы</span>
           <span>{product.carbs}</span>
         </div>
         <div className={styles.ingredient}>
-          <span>ккал</span>
+          <span>Ккал</span>
           <span>{product.energy}</span>
         </div>
         <div className={styles.ingredient}>
-          <span>граммы</span>
+          <span>Граммы</span>
           <span>{product.portionWeightGrams}</span>
         </div>
       </div>
