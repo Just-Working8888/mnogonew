@@ -21,7 +21,7 @@ const patchTableOrder = (id: number, data: ITableOrderDto, sourceToken?: CancelT
     instance.patch(`/tables/table_order/${id}`, { ...data }, { cancelToken: sourceToken });
 
 const deleteTableOrderById = (id: number, sourceToken?: CancelToken) =>
-    instance.delete(`/tables/table_order/${id}`, { cancelToken: sourceToken });
+    instance.delete(`/tables/table_order/${id}/`, { cancelToken: sourceToken });
 
 const endpoints = {
     getTableOrder,

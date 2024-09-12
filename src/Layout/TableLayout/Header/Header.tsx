@@ -2,25 +2,25 @@ import React, { useState, useEffect } from 'react';
 import { Button, Flex, Input } from 'antd';
 import { CaretDownOutlined, CaretUpOutlined, SearchOutlined } from '@ant-design/icons';
 import classes from './Header.module.scss';
-import { useAppDispatch, useAppSelector } from '../../store/hook';
-import { fetchCategories } from '../../store/reducers/Categories';
-import { setCategory, setOffcet } from '../../store/slices/windowSlice';
-import { clearData } from '../../store/slices/productSlice';
-import CartDrawer from '../CartBar/CartBar';
-import { useNavigate } from 'react-router-dom';
-import AuthModal from '../Auth/Auth';
-import Protected from '../Protected/Protected';
-import { deleteCookie } from '../../helpers/cookies';
+import { useAppDispatch, useAppSelector } from '../../../store/hook';
+import { fetchCategories } from '../../../store/reducers/Categories';
+import { setCategory, setOffcet } from '../../../store/slices/windowSlice';
+import { clearData } from '../../../store/slices/productSlice';
+import { useNavigate, useParams } from 'react-router-dom';
+import { deleteCookie } from '../../../helpers/cookies';
 import { CSSTransition } from 'react-transition-group';
 import './Header.module.scss';  // Подключаем файл стилей
-import { fetchProduct } from '../../store/reducers/productReduser';
+import { fetchProduct } from '../../../store/reducers/productReduser';
+import Protected from '../../../components/Protected/Protected';
+import AuthModal from '../../../components/Auth/Auth';
+import CartDrawer from '../../../components/CartBarTable/CartBar';
 const scrollToTop = () => {
     window.scrollTo({
         top: 0,
         behavior: "smooth" // плавный скролл
     });
 };
-const Header: React.FC = () => {
+const HeaderTable: React.FC = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [showSearch, setShowSearch] = useState(false);
     const [auth, setAuth] = useState(false);
@@ -31,6 +31,7 @@ const Header: React.FC = () => {
     const { menuprops } = useAppSelector((state) => state.window);
     const [search, setSearch] = useState('')
     const [debouncedSearch, setDebouncedSearch] = useState(search);
+    const { tableid } = useParams()
 
     const [all, setAll] = useState(false);
 
@@ -53,7 +54,7 @@ const Header: React.FC = () => {
         dispatch(setOffcet(1));
         dispatch(clearData());
         handleScroll();
-        // handleNavigate('/')
+        // handleNavigate(`/table/${tableid}/`)
         dispatch(setCategory(0))
         dispatch(fetchProduct({ filters: `search=${debouncedSearch}` }));
     }, [debouncedSearch]);
@@ -95,7 +96,7 @@ const Header: React.FC = () => {
                 <header className={classes.header}>
                     <Flex wrap='wrap' gap={10} justify="space-between" align="center">
                         <Flex gap={26} align="center">
-                            <div onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
+                            <div onClick={() => navigate(`/table/${tableid}/menu`)} style={{ cursor: 'pointer' }}>
                                 <img
                                     src="https://mnogosuhi.vercel.app/static/media/blackLogo%20(1).38e8ec556aedb0f78b19.png"
                                     width={50}
@@ -123,7 +124,7 @@ const Header: React.FC = () => {
                     <nav className="navbar">
                         <div onClick={() => {
                             scrollToTop()
-                            navigate('/')
+                            navigate(`/table/${tableid}/menu`)
                         }} style={{ cursor: 'pointer' }}>
                             <img
                                 src="https://mnogosuhi.vercel.app/static/media/blackLogo%20(1).38e8ec556aedb0f78b19.png"
@@ -138,7 +139,7 @@ const Header: React.FC = () => {
                                         dispatch(setOffcet(1))
                                         dispatch(clearData())
                                         dispatch(setCategory(0))
-                                        handleNavigate('/')
+                                        handleNavigate(`/table/${tableid}/menu`)
                                         handleScroll()
                                     }}
                                     type={
@@ -154,7 +155,7 @@ const Header: React.FC = () => {
                                             dispatch(setOffcet(1))
                                             dispatch(clearData())
                                             dispatch(setCategory(category.id))
-                                            handleNavigate('/')
+                                            handleNavigate(`/table/${tableid}/menu`)
                                             handleScroll()
                                         }}
                                         type={
@@ -198,7 +199,7 @@ const Header: React.FC = () => {
 
             <div className={classes.mobile_cart}>
                 <CartDrawer />
-                <button onClick={() => navigate('/order')} className='buttonn' style={{ color: 'white' }}>Оформить</button>
+                <button onClick={() => navigate(`/table/${tableid}/tablebiling`)} className='buttonn' style={{ color: 'white' }}>Оформить</button>
             </div>
             <div className="floatButton">
                 <CartDrawer />
@@ -207,4 +208,4 @@ const Header: React.FC = () => {
     );
 };
 
-export default Header;
+export default HeaderTable;

@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { Drawer, Button, List, Avatar, message, Badge } from 'antd';
 import { ShoppingCartOutlined, DeleteOutlined } from '@ant-design/icons';
 import './CartDrawer.scss';
-import { fetchCartItemById } from '../../store/reducers/cartReduser';
 import { useAppDispatch, useAppSelector } from '../../store/hook';
 import Counter from './Counter/Counter';
 import { api } from '../../api';
 import { removeItem } from '../../store/slices/cartSlice';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { fetchOrderItemById } from '../../store/reducers/TableOrderReduser';
+import { fetchTableById } from '../../store/reducers/tableReduser';
 
 
 
@@ -16,15 +17,13 @@ import { useNavigate } from 'react-router-dom';
 const CartDrawer: React.FC = () => {
     const [visible, setVisible] = useState(false);
     const dispatch = useAppDispatch();
-    const { data } = useAppSelector((state) => state.cart);
-
+    const data = useAppSelector((state) => state.tableCart.data)
+    const { tableid } = useParams()
     const navigate = useNavigate()
 
     useEffect(() => {
-        const cartId = localStorage.getItem('cart_id');
-        if (cartId) {
-            dispatch(fetchCartItemById({ id: Number(cartId) }));
-        }
+        dispatch(fetchOrderItemById({ id: Number(localStorage.getItem('table_key')) }));
+        dispatch(fetchTableById({ id: Number(tableid) }))
     }, [dispatch]);
 
     const showDrawer = () => {
@@ -37,9 +36,9 @@ const CartDrawer: React.FC = () => {
     async function delte(id: number) {
 
         try {
-
-            await api.deleteCartItemById(id).then(() => {
+            await api.deleteTableOrderItemById(id).then(() => {
                 dispatch(removeItem(id))
+                dispatch(fetchOrderItemById({ id: Number(localStorage.getItem('table_key')) }));
                 message.success('товар успешно удален из корзины')
             })
 
@@ -101,21 +100,14 @@ const CartDrawer: React.FC = () => {
                         <span>Итого:</span>
                         <span>{totalPrice} c</span>
                     </div>
-                    {/* <div className="cart-summary-item">
-                        <span>Налог 5%:</span>
-                        <span>{ } ₽</span>
-                    </div> */}
-                    {/* <div className="cart-summary-item">
-                        <span>Скидка:</span>
-                        <span>-{data.discount_amount} ₽</span>
-                    </div> */}
+
                     <div className="cart-summary-item total">
                         <span>К оплате:</span>
                         <span>{totalPrice} c</span>
                     </div>
 
                     <Button onClick={() => {
-                        navigate('/order')
+                        navigate(`/table/${tableid}/tablebiling`)
                         onClose()
                     }} type="primary" block>
                         Оформить заказ

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { LockOutlined, UserOutlined, MailOutlined } from '@ant-design/icons';
+import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input, message, Modal } from 'antd';
 import axios from 'axios';
 import classes from './AuthModal.module.scss';
@@ -24,7 +24,11 @@ const AuthModal: React.FC<{ visible: boolean, onClose: () => void }> = ({ visibl
             }
         } catch (err: any) {
             if (axios.isAxiosError(err) && err.response) {
-                message.error(err.response.data.message || 'Ошибка авторизации.');
+                if (err.response.data.password) {
+                    err.response.data.password.forEach((error: string) => message.error(error));
+                } else {
+                    message.error(err.response.data.message || 'Ошибка авторизации.');
+                }
             } else {
                 message.error('Ошибка соединения с сервером.');
             }
@@ -36,7 +40,11 @@ const AuthModal: React.FC<{ visible: boolean, onClose: () => void }> = ({ visibl
     const onFinishRegister = async (values: any) => {
         try {
             setLoading(true);
-            const response = await dispatch(registerAsync({ username: values.username, password: values.password, password2:values.pa }));
+            const response = await dispatch(registerAsync({
+                username: values.username,
+                password: values.password,
+                password2: values.password2
+            }));
             if (response.payload.access) {
                 message.success('Login successful');
                 setCookie('access_token', response.payload.access, 30);
@@ -44,8 +52,15 @@ const AuthModal: React.FC<{ visible: boolean, onClose: () => void }> = ({ visibl
                 onClose();
             }
         } catch (err: any) {
+            console.log(err, 'sex');
             if (axios.isAxiosError(err) && err.response) {
-                message.error(err.response.data.message || 'Ошибка авторизации.');
+                if (err.response.data.password) {
+                    err.response.data.password.forEach((error: string) => message.error(error));
+                } else {
+
+
+                    message.error(err.response.data.message || 'Ошибка регистрации.');
+                }
             } else {
                 message.error('Ошибка соединения с сервером.');
             }
@@ -53,6 +68,7 @@ const AuthModal: React.FC<{ visible: boolean, onClose: () => void }> = ({ visibl
             setLoading(false);
         }
     };
+
 
     return (
         <Modal
@@ -83,14 +99,6 @@ const AuthModal: React.FC<{ visible: boolean, onClose: () => void }> = ({ visibl
                     <Input prefix={<UserOutlined />} placeholder="Имя пользователя" />
                 </Form.Item>
 
-                {!isLogin && (
-                    <Form.Item
-                        name=""
-                        rules={[{ required: true, message: 'Введите email!', type: 'email' }]}
-                    >
-                        <Input prefix={<MailOutlined />} placeholder="Email" />
-                    </Form.Item>
-                )}
 
                 <Form.Item
                     name="password"
@@ -99,12 +107,20 @@ const AuthModal: React.FC<{ visible: boolean, onClose: () => void }> = ({ visibl
                     <Input prefix={<LockOutlined />} type="password" placeholder="Пароль" />
                 </Form.Item>
 
+                {!isLogin && (
+                    <Form.Item
+                        name="password2"
+                        rules={[{ required: true, message: 'Введите Пвроль!', }]}
+                    >
+                        <Input prefix={<LockOutlined />} type="password" placeholder="Пароль" />
+                    </Form.Item>
+                )}
                 {isLogin && (
                     <Form.Item>
                         <Form.Item name="remember" valuePropName="checked" noStyle>
                             <Checkbox>Запомнить меня</Checkbox>
                         </Form.Item>
-                        <a className={classes.forgot} href="#/">Забыли пароль?</a>
+                        {/* <a className={classes.forgot} href="#/">Забыли пароль?</a> */}
                     </Form.Item>
                 )}
 

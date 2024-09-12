@@ -58,7 +58,7 @@ const Footer: React.FC = () => {
                 </div>
             </div>
             <div className="footer-bottom">
-                <span>Mnogosushi © 2024</span>
+                <span>Mnogosushi 2023 - 2024 By Codex</span>
                 <span>Правовая информация</span>
             </div>
         </footer>

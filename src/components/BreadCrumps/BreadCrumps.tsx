@@ -6,18 +6,24 @@ import styles from "./Breadcrumbs.module.scss";
 const routeNames: { [key: string]: string } = {
     "": "Главная",
     "product": "Продукт",
-    "order": "Заказ"
+    "order": "Заказ",
+    "categories": "Категории"
 };
 
 const Breadcrumbs: React.FC = () => {
     const location = useLocation();
-
+    const scrollToTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth" // плавный скролл
+        });
+    };
     // Разбиваем путь на массив элементов
     const pathnames = location.pathname.split("/").filter(Boolean);
 
     return (
         <nav className={styles.breadcrumbs}>
-            <Link to="/">Главная</Link>
+            <Link to="/" onClick={() => scrollToTop()}>Главная</Link>
             {pathnames.map((value, index) => {
                 const to = `/${pathnames.slice(0, index + 1).join("/")}`;
 

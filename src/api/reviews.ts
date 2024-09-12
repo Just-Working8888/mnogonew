@@ -23,12 +23,18 @@ const patchReviews = (id: number, data: IReviewsDto, sourceToken?: CancelToken) 
 const deleteReviewsById = (id: number, sourceToken?: CancelToken) =>
     instance.delete(`/products/reviews/${id}`, { cancelToken: sourceToken });
 
+const applyPromoCode = (data: any, sourceToken?: CancelToken) =>
+    instance.post(`/carts/promocode/`, {
+        ...data
+    }, { cancelToken: sourceToken });
+
 const endpoints = {
     getReviews,
     getReviewsById,
     createReviews,
     updateReviews,
     patchReviews,
-    deleteReviewsById
+    deleteReviewsById,
+    applyPromoCode
 };
 export default endpoints;
