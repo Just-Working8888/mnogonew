@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Drawer, Button, List, Avatar, message } from 'antd';
+import { Drawer, Button, List, Avatar, message, Badge } from 'antd';
 import { ShoppingCartOutlined, DeleteOutlined } from '@ant-design/icons';
 import './CartDrawer.scss';
 import { fetchCartItemById } from '../../store/reducers/cartReduser';
@@ -54,9 +54,12 @@ const CartDrawer: React.FC = () => {
 
     return (
         <div>
-            <div onClick={showDrawer} className="button">
+            <Badge count={data?.items?.length}>  <div onClick={showDrawer} className="button">
+
                 <ShoppingCartOutlined />
-            </div>
+
+
+            </div>       </Badge>
             <Drawer
                 title={`В корзине ${data.items?.length || 0} товара`}
                 placement="right"

@@ -4,7 +4,7 @@ import { Button, Checkbox, Form, Input, message, Modal } from 'antd';
 import axios from 'axios';
 import classes from './AuthModal.module.scss';
 import { useAppDispatch } from '../../store/hook';
-import { loginAsync } from '../../store/reducers/authRedusers';
+import { loginAsync, registerAsync } from '../../store/reducers/authRedusers';
 import { setCookie } from '../../helpers/cookies';
 
 const AuthModal: React.FC<{ visible: boolean, onClose: () => void }> = ({ visible, onClose }) => {
@@ -36,13 +36,19 @@ const AuthModal: React.FC<{ visible: boolean, onClose: () => void }> = ({ visibl
     const onFinishRegister = async (values: any) => {
         try {
             setLoading(true);
-            // Ваша логика для регистрации
-            console.log(values);
-            
-            message.success('Регистрация прошла успешно');
-            onClose();
+            const response = await dispatch(registerAsync({ username: values.username, password: values.password, password2:values.pa }));
+            if (response.payload.access) {
+                message.success('Login successful');
+                setCookie('access_token', response.payload.access, 30);
+                localStorage.setItem('user_id', response.payload.user_id);
+                onClose();
+            }
         } catch (err: any) {
-            message.error('Ошибка регистрации');
+            if (axios.isAxiosError(err) && err.response) {
+                message.error(err.response.data.message || 'Ошибка авторизации.');
+            } else {
+                message.error('Ошибка соединения с сервером.');
+            }
         } finally {
             setLoading(false);
         }
@@ -79,7 +85,7 @@ const AuthModal: React.FC<{ visible: boolean, onClose: () => void }> = ({ visibl
 
                 {!isLogin && (
                     <Form.Item
-                        name="email"
+                        name=""
                         rules={[{ required: true, message: 'Введите email!', type: 'email' }]}
                     >
                         <Input prefix={<MailOutlined />} placeholder="Email" />

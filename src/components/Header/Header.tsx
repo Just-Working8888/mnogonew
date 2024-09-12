@@ -18,6 +18,7 @@ import { fetchProduct } from '../../store/reducers/productReduser';
 const Header: React.FC = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [showSearch, setShowSearch] = useState(false);
+    const [auth, setAuth] = useState(false);
     const targetId = useAppSelector((state) => state.scroll.targetId);
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
@@ -96,7 +97,7 @@ const Header: React.FC = () => {
                                     alt=""
                                 />
                             </div>
-                            <AuthModal visible={false} onClose={() => { }} />
+                            <AuthModal visible={auth} onClose={() => setAuth(false)} />
 
                             <div>
                                 <a href="tel:0 (551) 550-550">0 (551) 550-550</a>
@@ -104,7 +105,7 @@ const Header: React.FC = () => {
                             </div>
                         </Flex>
                         <div>
-                            <Protected fallback={<Button style={{ height: '40px', borderRadius: '10px' }} type="primary" onClick={() => { }}>
+                            <Protected fallback={<Button style={{ height: '40px', borderRadius: '10px' }} type="primary" onClick={() => setAuth(true)}>
                                 Войти / Зарегистрироваться
                             </Button>}>
                                 <Button style={{ height: '40px', borderRadius: '10px' }} onClick={() => deleteCookie('access_token')}>Выйти</Button>
@@ -186,6 +187,11 @@ const Header: React.FC = () => {
                     </CSSTransition>
                 </header>
             )}
+
+            <div className={classes.mobile_cart}>
+                <CartDrawer />
+                <button onClick={() => navigate('/order')} className='buttonn' style={{ color: 'white' }}>Оформить</button>
+            </div>
         </>
     );
 };
